@@ -8,15 +8,15 @@ class AppApi {
         return new Promise((resolve, reject) => {
             const buildWriteRecord = {
                 id: uuid(),
-                key: data['key'].toString()
+                data: data['data'].toString()
             }
 
             const record = {
-                'id': {
+                id: {
                     S: buildWriteRecord.id
                 },
-                'key': {
-                  S: buildWriteRecord.key  
+                data: {
+                  S: buildWriteRecord.data  
                 }
             }
             
@@ -55,7 +55,7 @@ class AppApi {
                     if(item) {
                         return resolve({
                             id: item['id'] && item['id']['S'],
-                            key: item['key'] && item['key']['S']
+                            data: item['data'] && item['data']['S']
                         })
                     } else {
                         reject({
@@ -63,7 +63,6 @@ class AppApi {
                             message: `No record found for Id(${itemId})`
                         })
                     }
-                    
                 }
             })
         })
